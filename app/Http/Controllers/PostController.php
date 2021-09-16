@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $allPosts = Post::all();
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('allPosts'));
     }
 
     /**
@@ -34,7 +34,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'cover'=>'url'
+        ]);
         $data= $request->all();
         $post= new Post();
         $post->title = $data['title'];
@@ -42,6 +45,7 @@ class PostController extends Controller
         $post->author = $data['author'];
         $post->cover = $data['cover'];
         $post-> save();
+        return redirect()->route('post.show', $post ->id);
     }
 
     /**

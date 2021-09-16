@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::all();
+        $allPosts = Post::all();
         return view('posts.index', compact('posts'));
     }
 
@@ -35,7 +35,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $data= $request->all();
         $post= new Post();
         $post->title = $data['title'];
@@ -54,7 +53,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show', compact('posts'));
+        return view('posts.show', compact('post'));
     }
 
     /**

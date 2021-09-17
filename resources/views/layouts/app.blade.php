@@ -22,9 +22,10 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <a href="/post/create"><h4><i class="bi bi-plus-square-fill"></i></h4></a> 
-            <a href="/post"><h4><i class="bi bi-house-door-fill"></i></h4></a>
+            
             <div class="container">
+            <a href="/post/create"><h3><i class="bi bi-plus-square-fill"></i></h3></a> 
+                <a href="/post"><h3><i class="bi bi-house-door-fill"></i></h3></a>
                 <a class="navbar-brand" href="{{ url('/post') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     Home 

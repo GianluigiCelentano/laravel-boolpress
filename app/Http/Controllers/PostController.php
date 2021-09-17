@@ -78,7 +78,7 @@ class PostController extends Controller
     {
        $data= $request->all();
        $this->fillAndSavePost($post, $data);
-       return redirect()->route('posts.show', $post);
+       return redirect()->route('post.show', $post);
     }
 
     /**
@@ -91,7 +91,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('post.index');
     }
     private function fillAndSavePost($post, $data) {
         $post->title = $data['title'];

@@ -6,15 +6,17 @@
     TITOLO: {{$post->title}}</br>
     TESTO: {{$post->postText}}</br>
     AUTORE: {{$post->author}}</br>
-    <a href="/post/{{$post->id}}"><img class="photo" src="{{$post->cover}}" alt=""></a></br> 
-    <div>
-            <a href="{{route('post.edit', $post)}}"><h5><i class="bi bi-pencil-fill"></i></h5></a>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <a href="/post/{{$post->id}}"><img class="photo" src="{{$post->cover}}" alt=""></a></br>
+
+    @if(Auth::check())
+        <div class="modal-container">
+            <a href="{{route('post.edit', $post)}}"><h5><button type="button" class="btn btn-primary">Modifica post</button></h5></a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-{{$post->id}}">
             Elimina post
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modal-{{$post->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -27,7 +29,7 @@
                             Sei sicuro di voler eliminare questo post?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
                             <form action="{{route('post.destroy', $post)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -38,5 +40,6 @@
                 </div>
             </div>
         </div>
+    @endif
 </div>
 @endsection

@@ -24,11 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        if(empty($user)) {
-            return "You must be logged";
-        }
-        $allPosts = Post::all();
-        return view('home', compact('allPosts'));
+        
     }
 }

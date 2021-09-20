@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
+    @if(! Auth::check())
+        <h2 class="ad text-center">Ricordati di effettuare il login o di registrarti per gestire i post !</h2> 
+    @endif
+<header>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,13 +21,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+</header>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             
             <div class="container">
-            <a href="/post/create"><h3><i class="bi bi-plus-square-fill"></i></h3></a> 
+                @if(Auth::check())
+                    <a href="/post/create"><h3><i class="bi bi-plus-square-fill"></i></h3></a> 
+                @endif
                 <a href="/post"><h3><i class="bi bi-house-door-fill"></i></h3></a>
                 <a class="navbar-brand" href="{{ url('/post') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->

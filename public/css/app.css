@@ -12332,3 +12332,14 @@ a.text-dark:focus {
   }
 }
 
+.modal-container {
+  padding: 10px;
+}
+
+.ad {
+  z-index: 1001;
+  color: red;
+  top: 0;
+  position: sticky;
+}
+

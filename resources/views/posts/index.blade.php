@@ -32,7 +32,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <form action="{{route('post.destroy', $post)}}" method="POST">
                                 @csrf
-                                @method('DELETE')
+                                @method('DELETE') 
                                 <input class="btn btn-primary" type="submit" value="Elimina">
                             </form>
                         </div>

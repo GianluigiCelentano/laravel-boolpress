@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\PostDetail;
+use App\Facing;
 class PostController extends Controller
 {
     // public function __construct()
@@ -28,7 +30,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $facings=Facing::all();
+        return view('posts.create', compact('facings'));
     }
 
     /**
@@ -42,9 +45,9 @@ class PostController extends Controller
         $request->validate([
             'cover'=>'url'
         ]);
-        $data= $request->all();
         $post= new Post();
-        $this->fillAndSavePost($post, $data);
+        $postDetail=new PostDetail();
+        $this->fillAndSavePost($post, $postDetail, $request);
         return redirect()->route('post.show', $post->id);
     }
 
@@ -80,8 +83,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-       $data= $request->all();
-       $this->fillAndSavePost($post, $data);
+       $this->fillAndSavePost($post, $request);
        return redirect()->route('post.show', $post);
     }
 
@@ -97,11 +99,16 @@ class PostController extends Controller
 
         return redirect()->route('post.index');
     }
-    private function fillAndSavePost($post, $data) {
+    private function fillAndSavePost(Post $post, PostDetail $postDetail, Request $request) {
+        $data=$request->all();
+        $postDetail->thematic=$data['thematic'];
+        $postDetail->type=$data['type'];
         $post->title = $data['title'];
         $post->postText = $data['postText'];
         $post->author = $data['author'];
         $post->cover = $data['cover'];
+        $post->post_detail_id=$postDetail->id;
+        $post->facings_id=$data['facings_id'];
         $post-> save();
     }
 }
